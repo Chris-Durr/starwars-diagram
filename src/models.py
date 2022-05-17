@@ -8,12 +8,30 @@ from eralchemy import render_er
 
 Base = declarative_base()
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+class User(Base):
+    __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    password = Column(String(250), nullable=False)
+
+class Favoritos_Pl(Base):
+    __tablename__ = 'favoritos_pl'
+    id = Column(Integer, primary_key=True)
+    id_user = Column(Integer)
+    id_pl = Column(Integer)
+
+class Favoritos_Pj(Base):
+    __tablename__ = 'favoritos_pj'
+    id = Column(Integer, primary_key=True)
+    id_user = Column(Integer)
+    id_pj = Column(Integer)
+
+class Personajes(Base):
+    __tablename__ = 'personajes'
+    id = Column(Integer, primary_key=True)
+    nombre = Column(Integer)
+    id_pj = Column(Integer)
 
 class Address(Base):
     __tablename__ = 'address'
