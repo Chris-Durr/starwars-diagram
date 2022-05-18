@@ -18,9 +18,18 @@ class User(Base):
 class Favoritos_Pl(Base):
     __tablename__ = 'favoritos_pl'
     id = Column(Integer, primary_key=True)
-    id_user = Column(Integer)
-    id_pl = Column(Integer)
+    id_user = Column(Integer, ForeignKey('user.id'))
+    id_pl = Column(Integer, ForeignKey('planetas.id'))
     user = relationship(User)
+
+
+class Favoritos_Pj(Base):
+    __tablename__ = 'favoritos_pj'
+    id = Column(Integer, primary_key=True)
+    id_user = Column(Integer, ForeignKey('user.id'))
+    id_pj = Column(Integer, ForeignKey('personajes.id'))
+    user = relationship(User)
+
 
 class Planetas(Base):
     __tablename__ = 'planetas'
@@ -28,13 +37,7 @@ class Planetas(Base):
     nombre = Column(String(250), nullable=False)
     population = Column(Integer)
     gravity =  Column(String(250), nullable=False)
-
-class Favoritos_Pj(Base):
-    __tablename__ = 'favoritos_pj'
-    id = Column(Integer, primary_key=True)
-    id_user = Column(Integer)
-    id_pj = Column(Integer)
-    user = relationship(User)
+    favoritos_pl = relationship(Favoritos_Pl)
 
 class Personajes(Base):
     __tablename__ = 'personajes'
@@ -42,6 +45,7 @@ class Personajes(Base):
     nombre = Column(String(250), nullable=False)
     estatura = Column(Integer)
     colorOjos =  Column(String(250), nullable=False)
+    favoritos_pj = relationship(Favoritos_Pj)
 
 # class Address(Base):
 #     __tablename__ = 'address'
